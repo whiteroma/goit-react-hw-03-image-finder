@@ -1,9 +1,18 @@
-<ColorRing
-  visible={true}
+import { Bars } from 'react-loader-spinner';
+import { LoaderWrapper } from './Loader.styled';
+
+const Loader = () => (
+  <LoaderWrapper>
+    <Bars
   height="80"
   width="80"
-  ariaLabel="blocks-loading"
+  color="#3f51b5"
+  ariaLabel="bars-loading"
   wrapperStyle={{}}
-  wrapperClass="blocks-wrapper"
-  colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+  wrapperClass=""
+  visible={true}
 />
+  </LoaderWrapper>
+);
+
+export default Loader;

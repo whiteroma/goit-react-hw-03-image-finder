@@ -11,16 +11,16 @@ const initialValues = {
   imgName: '',
 };
 
-const validationSchema = Yup.object({
+const validationSchema = Yup.string({
   imgName: Yup.string().required('Please enter your search query'),
 });
 
 class Searchbar extends React.Component {
   handleSubmit = (values, { resetForm }) => {
-    if(values.imgName === '') {
+    if(values.imgName.trim() === '') {
         return toast.error('Please enter your search query')
     };
-    this.props.onSubmit(values);
+    this.props.onSubmit(values.imgName);
     resetForm();
   };
 
