@@ -1,6 +1,8 @@
 import React from 'react';
+import { ToastContainer } from 'react-toastify';
 import { Container } from './App.styled';
-import Modal from './Modal/Modal';
+// import Modal from './Modal/Modal';
+import SearchBar from './Searchbar/Searchbar';
 
 class App extends React.Component {
   state = {
@@ -13,10 +15,19 @@ class App extends React.Component {
     }));
   };
 
+  handleFormSubmit = imgName => {
+    this.setState({ ...imgName });
+  };
+
   render() {
     return (
       <Container>
-        {this.showModal && <Modal onClose={this.toggleModal} />}
+        <SearchBar onSubmit={this.handleFormSubmit} />
+        {/* {this.showModal && <Modal onClose={this.toggleModal} />} */}
+        
+        <React.StrictMode>
+        <ToastContainer autoClose={3000} />
+            </React.StrictMode>
       </Container>
     );
   }
