@@ -17,6 +17,9 @@ const validationSchema = Yup.object({
 
 class Searchbar extends React.Component {
   handleSubmit = (values, { resetForm }) => {
+    if(values.imgName === '') {
+        return toast.error('Please enter your search query')
+    };
     this.props.onSubmit(values);
     resetForm();
   };
@@ -39,9 +42,9 @@ class Searchbar extends React.Component {
               type="text"
               placeholder="Search images and photos"
             />
-            <React.StrictMode>
+            {/* <React.StrictMode>
               <ErrorMessage render={msg => toast.error(msg)} name="imgName" />
-            </React.StrictMode>
+            </React.StrictMode> */}
           </SearchForm>
         </Formik>
       </SearchBar>
