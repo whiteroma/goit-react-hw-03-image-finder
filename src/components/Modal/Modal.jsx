@@ -13,7 +13,7 @@ class Modal extends React.Component {
   componentWillUnmount() {
     window.removeEventListener('keydown', this.handleKeyDown);
   }
-
+  
   handleKeyDown = e => {
     if (e.code === 'Escape') {
       console.log('handleKeyDown');
