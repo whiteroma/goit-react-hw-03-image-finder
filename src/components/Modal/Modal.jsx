@@ -16,23 +16,28 @@ class Modal extends React.Component {
 
   handleKeyDown = e => {
     if (e.code === 'Escape') {
+      console.log('handleKeyDown');
       this.props.onClose();
     }
   };
 
   handleOverlayClick = e => {
     if (e.target === e.currentTarget) {
+      console.log('handleOverlayClick');
       this.props.onClose();
     }
   };
 
+
+
   render() {
     return createPortal(
-      <ModalOverlay>
-        <ModalWindow>{this.props.children}</ModalWindow>
+      <ModalOverlay onClick={this.handleOverlayClick}>
+        <ModalWindow>
+          {this.props.children}</ModalWindow>
       </ModalOverlay>,
       modalRoot
-    );
+    )
   }
 }
 
