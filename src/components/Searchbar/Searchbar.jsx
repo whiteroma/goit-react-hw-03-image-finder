@@ -1,6 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { ErrorMessage, Formik } from 'formik';
+// import PropTypes from 'prop-types';
+import { Formik } from 'formik';
 import { FcSearch } from 'react-icons/fc';
 import { SearchBar, SearchForm, SearchInput } from './Searchbar.styled';
 import * as Yup from 'yup';
@@ -53,6 +53,6 @@ class Searchbar extends React.Component {
 }
 
 export default Searchbar;
-{
+
   /* <div style={{ textAlign: 'center', color: "#c70d0d"}}>{msg}</div> */
-}
+

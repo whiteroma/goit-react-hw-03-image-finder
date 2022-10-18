@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 import React from 'react';
 import { ModalOverlay, ModalWindow } from './Modal.styled';
@@ -13,7 +13,7 @@ class Modal extends React.Component {
   componentWillUnmount() {
     window.removeEventListener('keydown', this.handleKeyDown);
   }
-  
+
   handleKeyDown = e => {
     if (e.code === 'Escape') {
       console.log('handleKeyDown');
@@ -32,7 +32,7 @@ class Modal extends React.Component {
 
   render() {
     return createPortal(
-      <ModalOverlay onClick={this.handleOverlayClick}>
+      <ModalOverlay onKeyPress={this.handleKeyDown} onClick={this.handleOverlayClick}>
         <ModalWindow>
           {this.props.children}</ModalWindow>
       </ModalOverlay>,
