@@ -29,10 +29,8 @@ class App extends React.Component {
     e.preventDefault();
     this.setState(prevState => ({
       page: prevState.page + 1,
-      status: 'pending'
+      status: 'pending',
     }));
-
-    
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -86,7 +84,10 @@ class App extends React.Component {
           <Container>
             <ImageGallery images={image} imgAlt={imgName} />
             {status === 'pending' ? (
-            <Loader />) : (<Button onClick={this.loadMore} />)}
+              <Loader />
+            ) : (
+              <Button onClick={this.loadMore} />
+            )}
           </Container>
         )}
       </Container>

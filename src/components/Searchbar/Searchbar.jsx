@@ -1,5 +1,4 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import { FcSearch } from 'react-icons/fc';
 import { SearchBar, SearchForm, SearchInput } from './Searchbar.styled';
@@ -17,9 +16,9 @@ const validationSchema = Yup.string({
 
 class Searchbar extends React.Component {
   handleSubmit = (values, { resetForm }) => {
-    if(values.imgName.trim() === '') {
-        return toast.error('Please enter your search query')
-    };
+    if (values.imgName.trim() === '') {
+      return toast.error('Please enter your search query');
+    }
     this.props.onSubmit(values.imgName);
     resetForm();
   };
@@ -42,9 +41,6 @@ class Searchbar extends React.Component {
               type="text"
               placeholder="Search images and photos"
             />
-            {/* <React.StrictMode>
-              <ErrorMessage render={msg => toast.error(msg)} name="imgName" />
-            </React.StrictMode> */}
           </SearchForm>
         </Formik>
       </SearchBar>
@@ -53,6 +49,3 @@ class Searchbar extends React.Component {
 }
 
 export default Searchbar;
-
-  /* <div style={{ textAlign: 'center', color: "#c70d0d"}}>{msg}</div> */
-

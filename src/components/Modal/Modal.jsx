@@ -1,4 +1,3 @@
-// import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 import React from 'react';
 import { ModalOverlay, ModalWindow } from './Modal.styled';
@@ -28,16 +27,16 @@ class Modal extends React.Component {
     }
   };
 
-
-
   render() {
     return createPortal(
-      <ModalOverlay onKeyPress={this.handleKeyDown} onClick={this.handleOverlayClick}>
-        <ModalWindow>
-          {this.props.children}</ModalWindow>
+      <ModalOverlay
+        onKeyPress={this.handleKeyDown}
+        onClick={this.handleOverlayClick}
+      >
+        <ModalWindow>{this.props.children}</ModalWindow>
       </ModalOverlay>,
       modalRoot
-    )
+    );
   }
 }
 
