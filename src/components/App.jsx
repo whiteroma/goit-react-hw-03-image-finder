@@ -5,7 +5,7 @@ import SearchBar from './Searchbar/Searchbar';
 import ImageGallery from './ImageGallery/ImageGallery';
 import Loader from './Loader/Loader';
 import Button from './Button/Button';
-import {toast} from 'react-toastify'
+import { toast } from 'react-toastify';
 
 class App extends React.Component {
   state = {
@@ -16,8 +16,8 @@ class App extends React.Component {
   };
 
   handleFormSubmit = imgName => {
-    console.log("~ handleFormSubmit");
-    
+    console.log('~ handleFormSubmit');
+
     this.setState({
       imgName: imgName,
       page: 1,
@@ -25,22 +25,23 @@ class App extends React.Component {
     });
   };
 
-
-  loadMore = () => {
+  loadMore = e => {
+    e.preventDefault();
     this.setState(prevState => ({
       page: prevState.page + 1,
+      status: 'pending'
     }));
+
+    
   };
 
   componentDidUpdate(prevProps, prevState) {
-
     if (
       prevState.page !== this.state.page ||
       prevState.imgName !== this.state.imgName
     ) {
-      console.log("~ componentDidUpdate");
+      console.log('~ componentDidUpdate');
       this.setState({ status: 'pending' });
-
       fetch(
         `https://pixabay.com/api/?q=${this.state.imgName}&page=${this.state.page}&key=29688696-be7a3ad549ffca9d5a732b68f&image_type=photo&orientation=horizontal&per_page=12`
       )
@@ -50,45 +51,47 @@ class App extends React.Component {
           }
           return Promise.reject(new Error('Change your search query'));
         })
-        .then(image => this.setState(prevState => ({ image: [...prevState.image, image],
-          status: 'resolved' })))
-        .catch(error => this.setState({ error, status: 'rejected' }));
+        .then(image => {
+          if (image.totalHits === 0) {
+            this.setState({ status: 'idle' });
+            return toast.error(
+              'Something went wrong. Try changing your search query'
+            );
+          }
+          this.setState(prevState => ({
+            image: [...prevState.image, ...image.hits],
+            status: 'resolved',
+          }));
+        })
+        .catch(error => {
+          return toast.error(error.message);
+        });
     }
   }
 
- 
   render() {
-    const { status, error, image, imgName  } = this.state;
+    const { status, image, imgName } = this.state;
 
-    if (status === 'idle') {
-      return (<Container>
-        <SearchBar onSubmit={this.handleFormSubmit} />
-        <ToastContainer autoClose={3000} />
-      </Container>);
-    }
-
-    if (status === 'pending') {
-      return (<Container>
-        <SearchBar onSubmit={this.handleFormSubmit} />
-        <Loader />
-        </Container>);
-    }
-
-    if (status === 'resolved') {
-      return (
+    return (
       <Container>
-      <SearchBar onSubmit={this.handleFormSubmit} />
-          <ImageGallery images={image} imgAlt={imgName} />
-          <Button onClick={this.loadMore} />
-      </Container>
-      );
-    }
+        <ToastContainer autoClose={3000} />
+        <SearchBar onSubmit={this.handleFormSubmit} />
+        {status === 'pending' && (
+          <Container>
+            <Loader />
+          </Container>
+        )}
 
-    if (status === 'rejected') {
-      return toast(error.message);
-    }
+        {image.length > 0 && (
+          <Container>
+            <ImageGallery images={image} imgAlt={imgName} />
+            {status === 'pending' ? (
+            <Loader />) : (<Button onClick={this.loadMore} />)}
+          </Container>
+        )}
+      </Container>
+    );
   }
-  
 }
 
 export default App;

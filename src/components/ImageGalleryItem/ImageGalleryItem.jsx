@@ -15,11 +15,11 @@ class ImageGalleryItem extends React.Component {
     }
 
     render() {
-        const {webformatURL, largeImageURL, key, imgAlt} = this.props;
+        const {webformatURL, largeImageURL, imgAlt} = this.props;
         return(
-  <ImageGalleryListItem key={key} onClick={this.toggleModal}>
+  <ImageGalleryListItem onClick={this.toggleModal}>
     <img src={webformatURL} alt={imgAlt} />
-   {this.showModal && (
+   {this.state.showModal && (
     <Modal onClose={this.toggleModal}>
       <img src={largeImageURL} alt={imgAlt} />
     </Modal>

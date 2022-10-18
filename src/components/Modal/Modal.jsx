@@ -22,7 +22,7 @@ class Modal extends React.Component {
   };
 
   handleOverlayClick = e => {
-    if (e.target === e.currentTarget) {
+    if (e.target !== e.currentTarget) {
       console.log('handleOverlayClick');
       this.props.onClose();
     }
