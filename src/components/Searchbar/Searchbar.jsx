@@ -5,6 +5,7 @@ import { SearchBar, SearchForm, SearchInput } from './Searchbar.styled';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import PropTypes from 'prop-types';
 
 const initialValues = {
   imgName: '',
@@ -47,5 +48,9 @@ class Searchbar extends React.Component {
     );
   }
 }
+
+Searchbar.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
 
 export default Searchbar;

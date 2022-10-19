@@ -16,17 +16,16 @@ class App extends React.Component {
   };
 
   handleFormSubmit = imgName => {
-    console.log('~ handleFormSubmit');
-
-    this.setState({
-      imgName: imgName,
-      page: 1,
-      image: [],
-    });
+    if (this.state.imgName !== imgName) {
+      this.setState({
+        imgName: imgName,
+        page: 1,
+        image: [],
+      });
+    }
   };
 
-  loadMore = e => {
-    e.preventDefault();
+  loadMore = () => {
     this.setState(prevState => ({
       page: prevState.page + 1,
       status: 'pending',

@@ -18,7 +18,14 @@ const ImageGallery = ({ images, imgAlt }) => {
 };
 
 ImageGallery.propTypes = {
-  images: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  images: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      webformatURL: PropTypes.string.isRequired,
+      largeImageURL: PropTypes.string.isRequired,
+      imgAlt: PropTypes.string.isRequired,
+    })
+  ).isRequired,
   imgAlt: PropTypes.string.isRequired,
 };
 
